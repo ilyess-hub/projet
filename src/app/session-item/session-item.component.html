@@ -1,0 +1,27 @@
+<h2>{{ session.name }}</h2>
+<div [ngStyle]="{ color: couleur }">
+  {{ session.track }}
+</div>
+<div>
+  Prevue le {{ session.date | date: "d MMM y" }} pendant
+  {{ session.duree }} jours
+</div>
+<div>à {{ session.local }}</div>
+<li *ngIf="session.participants < 20; then ok; else notok"></li>
+<ng-template #ok
+  >Encore {{ 20 - session.participants }} places encore
+  disponibles!</ng-template
+>
+<ng-template #notok>Session complète</ng-template>
+<div>{{ session.participants }} Participants</div>
+<div class="tools">
+  <a class="delete"> Details </a>
+  <a
+    class="inscrire"
+    (click)="inscrire()"
+    [appInscriptionDisabled]="session.isCompleted"
+  >
+    Inscription
+  </a>
+  <a class="partager"> Partager </a>
+</div>
